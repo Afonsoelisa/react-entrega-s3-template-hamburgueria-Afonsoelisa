@@ -1,29 +1,44 @@
 import { useState } from "react";
-import Logo from "../../assets/Logo.svg";
-import { MdSearch, MdShoppingCart } from "react-icons/md";
 
-export const Header = () => {
-   const [value, setValue] = useState("");
+import { BiSearchAlt2 } from "react-icons/bi";
+import { FaShoppingCart } from "react-icons/fa";
+import logo from "../../assets/logo.png";
 
-   return (
-      <header>
-         <img src={Logo} alt="Logo Kenzie Burguer" />
-         <div>
-            <button>
-                <MdShoppingCart size={21} />
-                <span>0</span>
-            </button>
-            <form>
-               <input
-                  type="text"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-               />
-               <button type="submit">
-                 <MdSearch size={21} />
-               </button>
-            </form>
-         </div>
-      </header>
-   );
-};
+import Modal from "../Modal";
+import { CartCount, StyledHeader } from "./style";
+
+function Header({callback, isOpen, setIsOpen, products, setProducts, cart, setCart}) {
+    const [inputSearch, setInputSearch] = useState("");
+
+    function handleSbumit(e) {
+        e.preventDefault();
+        callback(inputSearch);
+    }
+
+
+    let count = cart.length;
+
+    return (
+        <StyledHeader>
+                <div className="container">
+                    <img src={logo} alt=""/>
+                    <button
+                        onClick={() => setIsOpen(true)}>
+                        <CartCount count={count}><FaShoppingCart size={25} color="#BDBDBD"/></CartCount>
+                    </button>
+                    {isOpen ? <Modal setIsOpen={setIsOpen} cart={cart} setCart={setCart}></Modal> : null}
+                </div>
+
+                <form onSubmit={handleSbumit}>
+                    <input
+                        type="search"
+                        placeholder="Digite aqui.."
+                        onChange={(e) => setInputSearch(e.target.value)}
+                    />
+                    <button><BiSearchAlt2 size={20} color="white"/></button>
+                </form>
+        </StyledHeader>
+    )
+}
+
+export default Header;

@@ -1,11 +1,17 @@
-import { HomePage } from "./pages/HomePage"
+import Feed from "./pages/Feed";
+import { GlobalStyles } from "./styles/global";
+import { GlobalReset } from "./styles/reset";
 
 function App() {
-  return (
-    <>
-      <HomePage />
-    </>
-  )
+    
+    return (
+        <div className="App" >
+            <GlobalReset/>
+            <GlobalStyles/>
+            <Feed/>
+
+        </div>
+    )
 }
 
-export default App
+export default App;

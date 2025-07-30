@@ -1,15 +1,17 @@
-import { MdDelete } from "react-icons/md";
+import { FontTitle } from "../../../styles/typograph";
+import { StyledFaTrash } from "../style";
 
-export const CartItemCard = ({ product }) => {
-   return (
-      <li>
-         <div>
-            <img src={product.img} alt={product.name} />
-            <h3>{product.name}</h3>
-         </div>
-         <button aria-label="delete" title="Remover item">
-            <MdDelete size={21} />
-         </button>
-      </li>
-   );
-};
+function CardModal({product, removeProductFromList}) {
+
+    return (
+        <li>
+            <div>
+                <img src={product.img} alt={product.name} />
+                <FontTitle>{product.name}</FontTitle>
+            </div>
+            <button onClick={() => removeProductFromList(product.id)}><StyledFaTrash size={25} /></button>
+        </li>
+    )
+}
+
+export default CardModal;
